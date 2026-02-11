@@ -32,7 +32,7 @@ Can we predict **net radiation at the top of the atmosphere (TOA)** using machin
 
 1. Setup Data Storage
 2. Merge Cloud Coverage Data sets and SST Data sets to build a NetCDF file for both.
-  - Treat/Clean Cloud Coverage Data
-  - Merge into a single NetCDF file
+    - Treat/Clean Cloud Coverage Data
+    - Merge into a single NetCDF file
 3. Build separate Training Data from CMIP as 250 years X 12 months X 25 members to estimate Radiation/Forcing Function
-  - This is for estimating radiation for periods outside of 1850-2004
+    - This is for estimating radiation for periods outside of 1850-2004
