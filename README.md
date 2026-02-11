@@ -27,3 +27,12 @@ Can we predict **net radiation at the top of the atmosphere (TOA)** using machin
 - `rsdt_rsut_rlut.ipynb` — TOA radiation analysis
 - `Reflected_shortwave_radiation_history.ipynb` — Shortwave trends
 - `Radiative_shortwave_downwelling.ipynb` — Downwelling radiation analysis
+
+## Training Data Plan
+
+1. Setup Data Storage
+2. Merge Cloud Coverage Data sets and SST Data sets to build a NetCDF file for both.
+  - Treat/Clean Cloud Coverage Data
+  - Merge into a single NetCDF file
+3. Build separate Training Data from CMIP as 250 years X 12 months X 25 members to estimate Radiation/Forcing Function
+  - This is for estimating radiation for periods outside of 1850-2004
