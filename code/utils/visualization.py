@@ -116,43 +116,31 @@ def plot_spatial_map(
 
 
 def plot_time_series(
-    data: xr.DataArray,
-    title: str = "",
-    ylabel: str = "",
-    xlabel: str = "Year",
+    data: xr.Dataset | xr.DataArray,
+    prefer_var: str = "tas",
     figsize: Tuple[float, float] = (14, 5),
     color: str = "darkblue",
     linewidth: float = 1.5,
-    add_smoothed: bool = False,
-    window: int = 120,
     ax: Optional[plt.Axes] = None
 ) -> Tuple[plt.Figure, plt.Axes]:
     """
-    Plot a time series of climate data.
-    
+    Plot a spatial-mean time series for a primary variable in an xarray object.
+
     Parameters
     ----------
-    data : xr.DataArray
-        1D time series data
-    title : str, optional
-        Plot title
-    ylabel : str, optional
-        Y-axis label
-    xlabel : str, default "Year"
-        X-axis label
+    data : xr.Dataset or xr.DataArray
+        Input dataset or data array to plot
+    prefer_var : str, default "tas"
+        Preferred variable name if present in a dataset
     figsize : tuple of float, default (14, 5)
         Figure size
     color : str, default "darkblue"
         Line color
     linewidth : float, default 1.5
         Line width
-    add_smoothed : bool, default False
-        Whether to add a smoothed line
-    window : int, default 120
-        Rolling window size (in months) for smoothing
     ax : matplotlib.axes.Axes, optional
         Existing axes to plot on
-        
+
     Returns
     -------
     fig : matplotlib.figure.Figure
@@ -160,38 +148,44 @@ def plot_time_series(
     ax : matplotlib.axes.Axes
         Axes object
     """
-    if ax is None:
-        fig, ax = plt.subplots(figsize=figsize)
+    if isinstance(data, xr.Dataset):
+        if prefer_var in data.data_vars:
+            var_name = prefer_var
+        else:
+            non_bnds = [v for v in data.data_vars if not v.endswith("_bnds")]
+            var_name = non_bnds[0] if non_bnds else list(data.data_vars)[0]
+        da = data[var_name]
     else:
-        fig = ax.get_figure()
-    
-    # Reduce spatial and member dimensions if present
-    plot_data = data.copy()
-    spatial_dims = [d for d in plot_data.dims if d in ['lat', 'lon', 'latitude', 'longitude']]
-    if spatial_dims:
-        plot_data = plot_data.mean(spatial_dims)
-    if "member" in plot_data.dims:
-        plot_data = plot_data.mean("member")
-    
-    # Plot original data
-    plot_data.plot(ax=ax, linewidth=linewidth, color=color, label="Original")
-    
-    # Add smoothed line if requested
-    if add_smoothed and "time" in plot_data.dims:
-        smoothed = plot_data.rolling(time=window, center=True).mean()
-        smoothed.plot(ax=ax, color="red", linewidth=linewidth, 
-                     label=f"{window}-month rolling mean")
-        ax.legend()
-    
-    ax.set_xlabel(xlabel, fontsize=12)
-    if ylabel:
-        ax.set_ylabel(ylabel, fontsize=12)
-    if title:
-        ax.set_title(title, fontsize=14, fontweight="bold")
-    ax.grid(True, alpha=0.3)
-    
-    plt.tight_layout()
-    
+        da = data
+        var_name = da.name or "variable"
+
+    if "time" in da.coords:
+        try:
+            da = da.assign_coords(time=da.indexes["time"].to_datetimeindex())
+        except Exception:
+            pass
+
+    if "time" not in da.dims:
+        raise ValueError("Input data must include a 'time' dimension for plotting.")
+
+    spatial_dims = [d for d in da.dims if d != "time"]
+    time_series = da.mean(spatial_dims) if spatial_dims else da
+
+    units = da.attrs.get("units", "")
+    ylabel = f"{var_name} ({units})" if units else var_name
+    title = f"Global Mean {var_name} Time Series"
+
+    fig, ax = plot_time_series(
+        data=time_series,
+        title=title,
+        ylabel=ylabel,
+        xlabel="Year",
+        figsize=figsize,
+        color=color,
+        linewidth=linewidth,
+        ax=ax
+    )
+
     return fig, ax
 
 
@@ -258,3 +252,5 @@ def plot_zonal_mean(
     plt.tight_layout()
     
     return fig, ax
+
+
