@@ -4,7 +4,7 @@
 
 ## Research Question
 
-Can we predict **Cloud Radiative Effect (CRE)** at the top of the atmosphere (TOA) using machine learning models trained on **surface temperature** data?
+Can we predict **Cloud Radiative Effect (CRE)** using machine learning models trained on **surface temperature** data?
 
 ## Key Objectives
 
@@ -20,7 +20,6 @@ Paleo_Climate_ML/
 ├── code/
 │   ├── utils/              # Reusable Python modules (NEW!)
 │   │   ├── data_io.py
-│   │   ├── data_processing.py
 │   │   └── visualization.py
 │   │
 │   ├── notebooks/          # Consolidated analysis notebooks (NEW!)
@@ -37,57 +36,18 @@ Paleo_Climate_ML/
 └── outputs/               # Model outputs and results
 ```
 
-## Quick Start
-
-### 1. Setup Environment
-
-```bash
-# Install dependencies
-pip install xarray[complete] numpy matplotlib cartopy dask rioxarray
-
-# Navigate to notebooks
-cd code/notebooks
-```
-
-### 2. Run Analysis Workflow
-
-Execute notebooks in order:
-
-```bash
-jupyter notebook 01_data_preparation.ipynb    # Prepare and merge data
-jupyter notebook 02_data_exploration.ipynb    # Explore patterns
-jupyter notebook 03_training_data_setup.ipynb # Create train/val/test splits
-```
-
-### 3. Use Utility Functions
-
-```python
-# In any notebook
-import sys
-sys.path.append('..')
-
-from utils import load_dataset, plot_spatial_map, compute_cloud_radiative_effect
-
-# Load data
-data = load_dataset("../../data/CanESM5_historical_tas.nc")
-
-# Visualize
-plot_spatial_map(data["tas"], title="Surface Temperature")
-```
 
 ## Recent Refactoring (Feb 2026)
 
 The codebase has been refactored to improve maintainability:
 
-- ✅ **16 notebooks consolidated into 3** focused workflows
-- ✅ **Reusable `utils` module** for common operations
-- ✅ **Consistent naming convention** (lowercase_with_underscores)
-- ✅ **Clear numbered workflow** (01 → 02 → 03)
-- ✅ **Original notebooks preserved** for reference
+- **16 notebooks consolidated into 3** focused workflows
+- **Reusable `utils` module** for common operations
+- **Consistent naming convention** (lowercase_with_underscores)
+- **Clear numbered workflow** (01 → 02 → 03)
+- **Original notebooks preserved** for reference
 
-See [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) for details.
-
-**Migration:** Optional - old notebooks still work!
+See [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) for details
 
 ## Data Files
 
@@ -121,15 +81,9 @@ See [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) for details.
 - **Target (y):** Cloud Radiative Effects (SWCRE, LWCRE)
 - **Time periods:** 
   - Train: 1850-2014 (historical)
-  - Validation: 1850-2014 (different ensemble members)
+  - Validation: 1850-2014 (observational data)
   - Test: 2015-2100 (future projections)
 - **Ensemble members:** 25 total (17 train / 4 val / 4 test)
-
-## Documentation
-
-- [code/README.md](code/README.md) - Detailed code organization
-- [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) - Migration guide
-- Function docstrings in `utils/` modules
 
 ## Contributing
 
@@ -139,3 +93,19 @@ When adding new functionality:
 2. **Analysis workflows** → Create numbered notebook in `code/notebooks/`
 3. **Follow naming conventions** → lowercase_with_underscores
 4. **Document functions** → Use numpy-style docstrings
+
+### Use Utility Functions
+
+```python
+# In any notebook
+import sys
+sys.path.append('..')
+
+from utils import load_dataset, plot_spatial_map, compute_cloud_radiative_effect
+
+# Load data
+data = load_dataset("../../data/CanESM5_historical_tas.nc")
+
+# Visualize
+plot_spatial_map(data["tas"], title="Surface Temperature")
+```

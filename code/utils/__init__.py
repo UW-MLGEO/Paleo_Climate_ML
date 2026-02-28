@@ -9,7 +9,6 @@ from .data_io import (
 
 from .visualization import (
     plot_spatial_map,
-    plot_time_series,
     plot_zonal_mean,
     setup_map_axes
 )
@@ -21,7 +20,6 @@ __all__ = [
     
     # Visualization
     'plot_spatial_map',
-    'plot_time_series',
     'plot_zonal_mean',
     'setup_map_axes',
 ]
