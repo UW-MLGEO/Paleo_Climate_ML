@@ -79,3 +79,18 @@ def select_variable(
         raise ValueError("No usable data variable found in dataset")
     
     return non_bnds[0]
+
+def save_dataset(dataset: xr.Dataset, filename: Union[str, Path]) -> None:
+    """
+    Save a dataset to a netCDF file.
+    
+    Parameters
+    ----------
+    dataset : xr.Dataset
+        Dataset to save
+    filename : str or Path
+        Path to the output netCDF file
+    """
+    dataset.to_netcdf(filename)
+    print(f"Saved dataset to {filename}")
+
