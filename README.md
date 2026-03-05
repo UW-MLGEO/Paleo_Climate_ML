@@ -70,13 +70,10 @@ See [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) for details
 - `X_train.nc` — Training input features (historical surface temperature, `tas`) 17 ensemble members 
 - `X_val.nc` — Validation input features (observational `tas`) 4 ensemble members
 - `X_test.nc` — Test input features (future `tas`) 4 ensemble members
-
 - `y_train_rsut.nc` — Training labels: shortwave Cloud Radiative Effect (`cre`)
 - `y_train_rlut.nc` — Training labels: longwave Cloud Radiative Effect (`cre`)
-
 - `y_val_rsut.nc` — Validation labels: shortwave CRE
 - `y_val_rlut.nc` — Validation labels: longwave CRE
-
 - `y_test_rsut.nc` — Test labels: shortwave CRE
 - `y_test_rlut.nc` — Test labels: longwave CRE
 
