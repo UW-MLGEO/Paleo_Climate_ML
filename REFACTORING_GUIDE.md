@@ -28,7 +28,8 @@ code/
 ├── notebooks/                       # NEW: Consolidated notebooks
 │   ├── 01_data_preparation.ipynb
 │   ├── 02_data_exploration.ipynb
-│   └── 03_training_data_setup.ipynb
+│   ├── 03_training_data_setup.ipynb
+│   └── 04_model_training.ipynb
 │
 ├── Initial Data Exploration/        # KEPT: Original notebooks
 │   └── ... (6 notebooks)
@@ -47,6 +48,7 @@ code/
 Functions extracted from multiple notebooks:
 - `load_dataset()` - netCDF loading
 - `select_variable()` - Variable selection (from Training_Data_Setup.ipynb)
+- `save_dataset()` - save to netCDF file
 
 
 #### `utils/visualization.py`
@@ -82,9 +84,15 @@ Functions extracted from multiple notebooks:
 - `Reflected_shortwave_radiation_history.ipynb` - Historical radiation
 - `Obervation_data_exploration.ipynb` - Observational data
 
-
 #### `03_training_data_setup.ipynb` (NEW)
 **Consolidates:**
 - `Training_Data_Setup.ipynb` - Main splitting logic
 - `Training_Data_Splitting.ipynb` - Additional splits
 - `Input_Data_Setup.ipynb` - Data alignment
+
+## Post-Refactor Conventions (Required for New Files)
+
+- New notebooks must be created in `code/notebooks/`.
+- Continue numbering sequentially (`04`, `05`, `06`, ...).
+- Naming format: `NN_descriptive_name.ipynb` (`lowercase_with_underscores`).
+- Reusable code belongs in `code/utils/`, not duplicated across notebooks.
