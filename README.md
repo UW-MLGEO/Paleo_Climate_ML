@@ -66,6 +66,20 @@ See [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) for details
 - `CanESM5_1850-2100_rsutcre.nc` — Shortwave Cloud Radiative Effect
 - `CanESM5_1850-2100_rlutcre.nc` — Longwave Cloud Radiative Effect
 
+### Model Training Data (created by notebooks)
+- `X_train.nc` — Training input features (historical surface temperature, `tas`) 17 ensemble members 
+- `X_val.nc` — Validation input features (observational `tas`) 4 ensemble members
+- `X_test.nc` — Test input features (future `tas`) 4 ensemble members
+
+- `y_train_rsut.nc` — Training labels: shortwave Cloud Radiative Effect (`cre`)
+- `y_train_rlut.nc` — Training labels: longwave Cloud Radiative Effect (`cre`)
+
+- `y_val_rsut.nc` — Validation labels: shortwave CRE
+- `y_val_rlut.nc` — Validation labels: longwave CRE
+
+- `y_test_rsut.nc` — Test labels: shortwave CRE
+- `y_test_rlut.nc` — Test labels: longwave CRE
+
 ## Key Concepts
 
 ### Cloud Radiative Effect (CRE)
@@ -85,20 +99,6 @@ See [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) for details
   - Validation: 1850-2014 (observational data)
   - Test: 2015-2100 (future projections)
 - **Ensemble members:** 25 total (17 train / 4 val / 4 test)
-
-### Model Training Data (created by notebooks)
-- `X_train.nc` — Training input features (historical surface temperature, `tas`) 17 ensemble members 
-- `X_val.nc` — Validation input features (observational `tas`) 4 ensemble members
-- `X_test.nc` — Test input features (future `tas`) 4 ensemble members
-
-- `y_train_rsut.nc` — Training labels: shortwave Cloud Radiative Effect (`cre`)
-- `y_train_rlut.nc` — Training labels: longwave Cloud Radiative Effect (`cre`)
-
-- `y_val_rsut.nc` — Validation labels: shortwave CRE
-- `y_val_rlut.nc` — Validation labels: longwave CRE
-
-- `y_test_rsut.nc` — Test labels: shortwave CRE
-- `y_test_rlut.nc` — Test labels: longwave CRE
 
 ## Contributing
 
