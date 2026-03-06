@@ -84,8 +84,8 @@ See [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) for details
 **Shortwave CRE** = All-sky reflected solar - Clear-sky reflected solar
 - Positive → Clouds reflect more solar radiation (cooling)
 
-**Longwave CRE** = Clear-sky thermal - All-sky thermal
-- Positive → Clouds trap more thermal radiation (warming)
+**Longwave CRE** = Clear-sky outgoing longwave - All-sky outgoing longwave
+- Positive → More OLR escaping to space (warming)
 
 ### Training Strategy
 
