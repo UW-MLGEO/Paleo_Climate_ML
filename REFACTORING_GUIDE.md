@@ -9,7 +9,7 @@ This document describes the refactoring performed on the Paleo Climate ML reposi
 ### What Changed
 
 1. **Created `utils/` module** with reusable Python functions
-2. **Consolidated 16 notebooks into 3 consice ones**
+2. **Consolidated 16 notebooks into 3 concise ones under `notebooks/`**
 3. **Established consistent naming convention** (lowercase with underscores)
 4. **Created single `notebooks/` folder** with numbered workflow
 
