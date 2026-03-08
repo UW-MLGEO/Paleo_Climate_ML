@@ -297,7 +297,7 @@ def setup_figure(nCols=1,nRows=1,size=(15,15),mask=True):
 
     land_feature = cfeature.NaturalEarthFeature(
 
-        "If mask = True, then the land will appear grey"
+        "If mask = True, then the land will appear grey",
 
         category='physical',
         name='land',
