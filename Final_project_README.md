@@ -14,8 +14,52 @@ Improving our understanding of the sea surface temperature (SST) controls on the
 
 ## Background
 
+### Atmospheric radiation and surface temperature
+![Earth's energy budget](figures/radiation-budget.jpg)
 
-## Inputs/Outputs
+**Total energy in the Earth system = Incoming energy + Outgoing energy,**
+
+where incoming energy may be considered to be positive, and outgoing, negative.
+Energy is mainly categorized as
+* **Shortwave (SW) from the sun:** ~30% reflected back to space by clouds. ~70% absorbed by Earth’s surface
+* **Longwave (LW) from Earth:** Earth’s surface and atmosphere emit longwave radiation upon warming.
+
+*Greenhouse effect:* When excess greenhouse gases trap longwave radiation and direct it back to the Earth’s surface, there is an imbalance in the radiation budget at the TOA as incoming energy > outgoing energy. Thus, the Earth’s surface must warm more in order to emit more LW and restore energy balance at the TOA.
+
+### Cloud cover and its radaitive effect
+Clouds have a crucial role in Earth’s energy budget:
+* **Albedo effect** reflect incoming SW energy from the sun back to space, *cooling* the Earth
+* **Greenhouse effect:** trap outgoing longwave energy at the TOA, *warming* the Earth
+
+Which effect dominates can depend (among other factors) on the type of clouds, their height in the atmosphere, etc. For example, cumulus clouds that are low in the sky typically have an albedo effect while cirrus clouds that are higher up in the sky have a warming effect.
+
+A metric used to quantify the net impact of clouds on the Earth's energy budget is defined as the *cloud radaitive effect (CRE)*. This is calculated from climate model as the difference between net TOA radiation in a *clear-sky* simulation (assuming an atmosphere with no clouds) from an *all-sky* simulation (assuming the atmosphere with the full cloud scheme):
+**Cloud Radiative Effect (CRE) = All-sky radiation - clear-sky radiation**
+
+### Machine learning (ML) to determine the CRE
+Given the strong evidence that changing SST patterns control both local and remote radiation, [Rugenstein et al. (2025)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024GL109581) have further shown that a CNN can be trained on internal variability (time-varying near-surface temperature maps) to learn the relationship between SST patterns and future global radiative response.
+
+However, the CRE is associated with LW radiation through high clouds and with SW radiation through lower stratocumulus decks both of which may be governed by different SST patters. For this project, we ask
+**Can a CNN trained on historical SST patterns predict the forced CRE in both the longwave and shortwave?**
+If the CNN predicts the CRE in one wavelength regime better than the other, this would point to the source of the model's skill in learning the relationship between SSTs and radiation.
+
+## Data
+
+We use simulations from the Canadian Earth System Model version 5 (CanESM5) which participated in Phase 6 of the Coupled Model Intercomparison Project (CMIP6).
+
+**Variables (netCDF4):**
+* rlut, rlutcs (radiative longwave upwelling, all-sky and clear-sky)
+* rsut, rsutcs (radaitive shortwave upwelling, all-sky, clear-sky)
+* tas (near-surface air temperature)
+
+LW CRE = rlut - rlutcs
+SW CRE = rsut - rsutcs
+
+**Dimensions:**
+* members (25 realizations)
+* time (monthly): 1850-2014 (*historical* simulations) for training and validation and 2015-2100 (*SSP2-4.5* simulation) for testing
+* latitude (64) and longitude (128)
+
 
 ## ML approach
 
