@@ -26,29 +26,19 @@ Paleo_Climate_ML/
 │   │   ├── 01_data_preparation.ipynb
 │   │   ├── 02_data_exploration.ipynb
 │   │   ├── 03_training_data_setup.ipynb
-│   │   └── 04_model_training.ipynb
+│   │   ├── 04_model_training.ipynb
+│   │   ├── 05_output_plotting.ipynb
+│   │   ├── 06_model_evaluation.ipynb
+│   │   └── 07_testing_CMIP.ipynb
 │   │
 │   └── [Original notebooks preserved in subdirectories]
 │
-├── data/                   # Climate model output
-│   ├── CanESM5_*.nc       # Historical & SSP data
-│   └── splits/            # Train/val/test splits
+├── data/                   # Climate model input and output
 │
-└── outputs/               # Model outputs and results
+└── figures/               # Final figures from ALtti, Justin and Filip
 ```
 
 
-## Recent Refactoring (Feb 2026)
-
-The codebase has been refactored to improve maintainability:
-
-- **16 notebooks consolidated into 3** focused workflows
-- **Reusable `utils` module** for common operations
-- **Consistent naming convention** (lowercase_with_underscores)
-- **Clear numbered workflow** (01 → 02 → 03 → ...)
-- **Original notebooks preserved** for reference
-
-See [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) for details
 
 ## Data Files
 
@@ -76,6 +66,9 @@ See [REFACTORING_GUIDE.md](REFACTORING_GUIDE.md) for details
 - `y_val_rlut.nc` — Validation labels: longwave CRE
 - `y_test_rsut.nc` — Test labels: shortwave CRE
 - `y_test_rlut.nc` — Test labels: longwave CRE
+### CMIP models for testing
+### saved_models
+### saved_netCDF
 
 ## Key Concepts
 
