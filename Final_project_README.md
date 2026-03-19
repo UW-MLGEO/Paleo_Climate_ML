@@ -17,7 +17,7 @@ Improving our understanding of the sea surface temperature (SST) controls on the
 ### Atmospheric radiation and surface temperature
 ![Earth's energy budget](figures/markdown_figures/radiation-budget.jpg)
 
-*Figure 1. Earth energy budget and radiation*
+*Figure 1. Earth energy budget and radiation (source: [Nasa](https://mynasadata.larc.nasa.gov/basic-page/earths-energy-budget))*
 
 **Total energy in the Earth system = Incoming energy + Outgoing energy,**
 
