@@ -175,9 +175,11 @@ These results indicate that the future TOA radiation response that the CNN can p
 
 ### Testing with Eocene 56 Ma climatic data (a fun experiment) 
 
-To test how the model performs in different conditions we used [DeepMIP](https://www.deepmip.org/) data from the Early Eocene (approx 56 Ma),
+To test how the model performs in different conditions, we used [DeepMIP](https://www.deepmip.org/) data from the Early Eocene (approx 56 Ma). 
+The moedel performed worse on this Eocene climate dataset on the modern dataset (Figure 5). This performance difference happens because the model learns spatial patterns from modern conditions and when using a much different spatial set up like the planet 56 Million with different ocean circulation, landmass distribution, and cloud regimes, prediction errors increase substantially. This result shows that we need to train the model on different spatial setups so it can learn the intrinsic spatial patterns.
 
-
+![DeepMIP Eocene test errors](figures/markdown_figures/Eocene_test.png)
+Figure 5:  Model outputs and errors testing with the DeepMIP Eocene data set.
 
 ## Future work
 
@@ -188,5 +190,7 @@ To test how the model performs in different conditions we used [DeepMIP](https:/
 - Use latitudinal splits, look into how training on tropics affects results.
 
 - Using different time periods.
+
+- Adding other ralted variables that can explain some of the residual variability.
 
 
